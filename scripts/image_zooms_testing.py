@@ -26,13 +26,13 @@ if __name__ == "__main__":
     ######## PATHS definition ########
 
     # path of pascal voc test
-    path_voc_test = "../../VOC2007_test/"
+    path_voc_test = "../../VOC2007_test"
     # model name of the weights
     model_name = "model_image_zooms"
     # path of folder where the weights are
-    weights_path = "../../resource/models_image_zooms/"
+    weights_path = "../../resource/models_image_zooms"
     # path of where to store visualizations of search sequences
-    path_testing_folder = '../../resource/testing/'
+    path_testing_folder = '../../resource/testing'
     # path of VGG16 weights
     path_vgg = "../../resource/vgg16_weights.h5"
 
