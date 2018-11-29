@@ -34,15 +34,15 @@ if __name__ == "__main__":
     ######## PATHS definition ########
 
     # path of PASCAL VOC 2012 or other database to use for training
-    path_voc = "./VOC2012/"
+    path_voc = "../../resource/VOC2012/"
     # path of other PASCAL VOC dataset, if you want to train with 2007 and 2012 train datasets
     path_voc2 = "./VOC2007/"
     # path of where to store the models
-    path_model = "../models_image_zooms"
+    path_model = "../../resource/models_image_zooms/"
     # path of where to store visualizations of search sequences
-    path_testing_folder = '../testing_visualizations'
+    path_testing_folder = '../../resource/testing_visualizations'
     # path of VGG16 weights
-    path_vgg = "../vgg16_weights.h5"
+    path_vgg = "../../resource/vgg16_weights.h5"
 
     ######## PARAMETERS ########
 
