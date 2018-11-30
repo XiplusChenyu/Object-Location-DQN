@@ -20,7 +20,12 @@ after this you need to input three command:
   https://segmentfault.com/a/1190000002645623
   https://jingyan.baidu.com/article/0320e2c11416cb1b86507b7d.html
 4. After you set-up GitHub, the operation for this projects:
-  - cd to git repo in VM, the git repo in this VM is root#~/rlpj/Hierarchical-Object-Location-in-Image
+  - cd to git repo in VM, the git repo in our google cloud VM is root#~/rlpj/Hierarchical-Object-Location-in-Image, for example, you want to sync the VM file with our GitHub code:
+  ```
+  cd ~/rlpj/Hierarchical-Object-Location-in-Image
+  git pull origin master
+  ```
+  Then you can run.
   - or you want to modify in your host:
     - use mkdir to create a folder
     - clone this repo to your folder
