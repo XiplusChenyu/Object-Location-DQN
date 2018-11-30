@@ -1,5 +1,7 @@
 # Hierarchical Object Location in Image
 Designing a reinforcement learning model with Deep Q-Learning algorithm in order to generate a localization policy which can efficiently locate objects within an image.
+# Enter VM
+**Please** use ssh to copy files between local hosts and VM
 # Current structures:
 - root/~#
   - rlpf
@@ -9,7 +11,7 @@ Designing a reinforcement learning model with Deep Q-Learning algorithm in order
     - VOC2012
     - resource (where I put weights and results)
 # Run VM background
-use tmux to run: http://louiszhai.github.io/2017/09/30/tmux/
+**Must** use tmux to run: http://louiszhai.github.io/2017/09/30/tmux/
 # Requirements
 - Python 2.7
 - install packages in requirements.txt (already add opencv-python)
