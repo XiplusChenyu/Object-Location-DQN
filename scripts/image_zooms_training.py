@@ -111,6 +111,7 @@ if __name__ == "__main__":
         time1 = time.time()
         print time1
         for j in range(np.size(image_names)):
+            print 'image: ' + str(j)
             masked = 0
             not_finished = 1
             image = np.array(images[j])
