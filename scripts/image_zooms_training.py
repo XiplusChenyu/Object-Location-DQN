@@ -34,11 +34,11 @@ if __name__ == "__main__":
     ######## PATHS definition ########
 
     # path of PASCAL VOC 2012 or other database to use for training
-    path_voc = "../../resource/VOC2012"
+    path_voc = "./../../VOC2012"
     # path of other PASCAL VOC dataset, if you want to train with 2007 and 2012 train datasets
     path_voc2 = "./VOC2007"
     # path of where to store the models
-    path_model = "../../resource/models_image_zooms"
+    path_model = "./../../resource/models_image_zooms"
     # path of where to store visualizations of search sequences
     path_testing_folder = '../../resource/testing_visualizations'
     # path of VGG16 weights
@@ -98,8 +98,10 @@ if __name__ == "__main__":
         images1 = get_all_images(image_names1, path_voc)
         images2 = get_all_images(image_names2, path_voc2)
         images = np.concatenate([images1, images2])
+        print 'pass'
     else:
         images = get_all_images(image_names, path_voc)
+        print 'pass'
 
     print 'read images done'
 
