@@ -49,9 +49,9 @@ git clone git@github.com:XiplusChenyu/Hierarchical-Object-Location-in-Image.git
    - After you made changes, for example: you modified a file in ./scripts
   ```
   cd scripts
-  git add . # add you modification in git, '.' means add all file, or you can use <git add sample.py> to add one file
-  git commit -m'your comment for this commit, for example: debug'
-  git push origin master # You add changes in GitHub repo
+  git add .       # add you modification in git, '.' means add all file, or you can use <git add sample.py> to add one file
+  git commit -m'<your comment for this commit, for example: debug>'
+  git push origin master       # You add changes in remote GitHub repo
   ```
   - **Notice**:
   Since we didn't use branchs in github, which means we only has one branch. Please **only push** we you finished debug, and notice others to sync.
