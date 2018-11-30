@@ -12,7 +12,7 @@ Designing a reinforcement learning model with Deep Q-Learning algorithm in order
     - resource (where I put weights and results)
 # Run VM background
 **Must** use tmux to run: http://louiszhai.github.io/2017/09/30/tmux/
-# Requirements
+# Requirements (done)
 - Python 2.7
 - install packages in requirements.txt (already add opencv-python)
 - install tensorflow 0.10.0 (with whl file, the file in this repo is for Mac OS X, see https://github.com/tensorflow/tensorflow/blob/v0.10.0rc0/tensorflow/g3doc/get_started/os_setup.md for other versions)
