@@ -1,6 +1,6 @@
 # Hierarchical Object Location in Image
-Designing a reinforcement learning model with Deep Q-Learning algorithm in order to generate a localization policy which can efficiently locate objects within an image.
-**please pull before you do some works, or please use github branchs**
+Designing a reinforcement learning model with Deep Q-Learning algorithm in order to generate a localization policy which can efficiently locate objects within an image.<br/>
+**please pull before you do some works, or please use github branchs**<br/>
 **all scripts needed to be update for python3.6**
 # Enter VM
 **Please** use ssh to copy files between local hosts and VM
