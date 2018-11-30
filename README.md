@@ -8,6 +8,8 @@ Designing a reinforcement learning model with Deep Q-Learning algorithm in order
     - rlen (virtualenv)
     - VOC2012
     - resource (where I put weights and results)
+# Run VM background
+use tmux to run: http://louiszhai.github.io/2017/09/30/tmux/
 # Requirements
 - Python 2.7
 - install packages in requirements.txt (already add opencv-python)
