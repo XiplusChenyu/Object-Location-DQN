@@ -1,5 +1,8 @@
 update: 11/30 add readme
+
+--------
 # About SSH and GitHub:
+#### If you don't want to use github, use ssh and scp operations to copy your files to VM and run what you want.
 1. How to set **git account** in your computer
 ```
 $ git config --global user.name "<name>"
@@ -49,8 +52,8 @@ git clone git@github.com:XiplusChenyu/Hierarchical-Object-Location-in-Image.git
   ```
   - **Notice**:
   Since we didn't use branchs in github, which means we only has one branch. Please **only push** we you finished debug, and notice others to sync.
-#### If you don't want to use github, use ssh and scp operations to copy your files to VM and run what you want.
-  
+
+-------
 # Hierarchical Object Location in Image
 Designing a reinforcement learning model with Deep Q-Learning algorithm in order to generate a localization policy which can efficiently locate objects within an image.<br/>
 **please pull before you do some works, or please use github branchs**<br/>
