@@ -1,4 +1,7 @@
-update: 11/30 add readme
+#### update: 
+- Please update this readme and add a log here
+
+11/30 add git,ssh and tmux
 
 --------
 # About SSH and GitHub:
@@ -13,7 +16,7 @@ $ git config --global user.email "<email>"
 $ ssh-keygen -t rsa -C "<your email for this key>"
 ```
 after this you need to input three command:
-- where to store the key file: <the key path>
+- where to store the key file: "the key path"
 - set and comfirm password
 3. How to get your ssh key
 - cd to the location where you store the key
