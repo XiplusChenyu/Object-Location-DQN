@@ -23,14 +23,13 @@ after this you need to input three command:
   - cd to git repo in VM, the git repo in this VM is root#~/rlpj/Hierarchical-Object-Location-in-Image
   - or you want to modify in your host:
     - use mkdir to create a folder
-  ```
-  mkdir rlpj
-  ```
     - clone this repo to your folder
-  ```
-  git clone git@github.com:XiplusChenyu/Hierarchical-Object-Location-in-Image.git
-  ```
-   - Now you has local repo
+    - Now you has local repo
+  
+```
+mkdir rlpj
+git clone git@github.com:XiplusChenyu/Hierarchical-Object-Location-in-Image.git
+```
  - Sync you modifications and run in VM
     - **Before you do your work, update your repo**
   ```
