@@ -1,5 +1,5 @@
 #### update: 
-- Please update this readme and add a log here
+> Please update this readme and add a log here
 
 11/30 add git,ssh and tmux
 
