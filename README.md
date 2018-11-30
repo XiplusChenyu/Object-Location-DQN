@@ -1,4 +1,4 @@
-update: 11/20 add readme
+update: 11/30 add readme
 # About SSH and GitHub:
 1. How to set **git account** in your computer
 ```
@@ -19,6 +19,34 @@ after this you need to input three command:
 <br/>Links:
   https://segmentfault.com/a/1190000002645623
   https://jingyan.baidu.com/article/0320e2c11416cb1b86507b7d.html
+4. After you set-up GitHub, the operation for this projects:
+  - cd to git repo in VM, the git repo in this VM is root#~/rlpj/Hierarchical-Object-Location-in-Image
+  - or you want to modify in your host:
+    - use mkdir to create a folder
+  ```
+  mkdir rlpj
+  ```
+    - clone this repo to your folder
+  ```
+  git clone git@github.com:XiplusChenyu/Hierarchical-Object-Location-in-Image.git
+  ```
+   - Now you has local repo
+ - Sync you modifications and run in VM
+    - **Before you do your work, update your repo**
+  ```
+  git pull origin master
+  ```
+   - After you made changes, for example: you modified a file in ./scripts
+  ```
+  cd scripts
+  git add . # add you modification in git, '.' means add all file, or you can use <git add sample.py> to add one file
+  git commit -m'your comment for this commit, for example: debug'
+  git push origin master # You add changes in GitHub repo
+  ```
+  - Notice:
+  Since we didn't use branchs in github, which means we only has one branch. Please **only push** we you finished debug, and notice others to sync.
+5. If you don't want to use github, use ssh and scp operations to copy your files to VM and run what you want.
+  
 # Hierarchical Object Location in Image
 Designing a reinforcement learning model with Deep Q-Learning algorithm in order to generate a localization policy which can efficiently locate objects within an image.<br/>
 **please pull before you do some works, or please use github branchs**<br/>
@@ -35,6 +63,7 @@ Designing a reinforcement learning model with Deep Q-Learning algorithm in order
     - resource (where I put weights and results)
 # Run VM background
 **Must** use tmux to run: http://louiszhai.github.io/2017/09/30/tmux/
+TMUX allow users run several program in terminal without keeping ssh coonections.
 # Requirements (done)
 - Python 2.7
 - install packages in requirements.txt (already add opencv-python)
