@@ -31,7 +31,7 @@ mkdir rlpj
 git clone git@github.com:XiplusChenyu/Hierarchical-Object-Location-in-Image.git
 ```
 5. Sync you modifications and run in VM
-   - **Before you do your work, update your repo**
+- **Before you do your work, update your repo**
   ```
   git pull origin master
   ```
