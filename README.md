@@ -1,6 +1,6 @@
 #### update: 
 > Please update this readme and add a log here
-
+12/01 update something
 11/30 add git,ssh and tmux
 
 --------
