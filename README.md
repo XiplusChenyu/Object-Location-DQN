@@ -1,3 +1,7 @@
+Pull Before You Push!!!<br/>
+Current issues:
+- There is no model weights for Vgg16
+- The training results is weired
 # Hierarchical-Object-Location-in-Image
 A pathetic project<br/>
 **See reference.md for reference**<br/>
