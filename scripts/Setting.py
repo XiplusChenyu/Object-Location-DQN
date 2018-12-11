@@ -16,11 +16,11 @@ test_model_name = '/model'+str(class_id)+'.h5'
 only_first_object = 1  # @whether only search the first object while testing
 
 # @ The dir info:
-path_dataset = './VOC2012'
-path_vgg16 = './vgg16_weights.h5'
-path_testing_folder = './img'
-path_model = "./models_image_zooms"
-path_test_dataset = './VOC2012'
+path_dataset = './../../VOC2012'
+path_vgg16 = './../../vgg16_weights.h5'
+path_testing_folder = './../../img'
+path_model = "./../../models_image_zooms"
+path_test_dataset = './../../VOC2012'
 use_vgg_weight = False
 
 # @ RL num
