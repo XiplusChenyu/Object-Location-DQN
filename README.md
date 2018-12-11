@@ -4,6 +4,9 @@ A pathetic project<br/>
 Image Zooming Method<br/>
 ## Current Setting:
 Training Object: bird
+## Requirement
+All up to date</br>
+Python 3.6
 ## The Current Structure:
 - Project
   - VOC2012
