@@ -8,7 +8,7 @@ Image Zooming Method<br/>
   - VOC2012
   - img_test (save test pics here)
   - img_train (save training process pics here)
-  - vgg16_weight.h5 (pre-trained vgg16 model) *need to be added*
+  - vgg16_weight.h5 (pre-trained vgg16 model) ***need to be added***
   - models_image_zooms (save Q-network models here)
     - tmp models for epochs
     - final model
