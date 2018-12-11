@@ -1,14 +1,11 @@
 # Hierarchical Object Detection with Deep Reinforcement Learning (Part)
-Original Source: https://github.com/XiplusChenyu/detection-2016-nipsws
+Original Source: https://imatge-upc.github.io/detection-2016-nipsws/
 
 ## Code Instructions
 
-This python code enables to both train and test each of the two models proposed in the paper. The image zooms model extracts features for each region visited, whereas the pool45 crops model extracts features just once and then ROI-pools features for each subregion. In this section we are going to describe how to use the code. The code uses Keras framework library. If you are using a virtual environment, you can use the requirements.txt provided.
-
-
 First it is important to notice that this code is already an extension of the code used for the paper. During the training stage, we are not only considering one object per image, we are also training for other objects by covering the already found objects with the mean of VGG-16, inspired by what Caicedo et al. did on Active Object Localization with Deep Reinforcement Learning.
 
-### Setup
+### Setup (For Old Version)
 
 First of all the weights of VGG-16 should be downloaded from the following link [VGG-16 weights]. If you want to use some pre-trained models for the Deep Q-network, they can be downloaded in the following link [Image Zooms model]. Notice that these models could lead to different results compared to the ones provided in the paper, due that these models are already trained to find more than one instance of planes in the image. You should also create two folders in the root of the project, called models_image_zooms and models_pool45_crops, and store inside them the corresponding weights.
 
@@ -20,21 +17,6 @@ First of all the weights of VGG-16 should be downloaded from the following link 
 ### Usage
 
 ##### Training
-
-We will follow as example how to train the Image Zooms model, that is the one that achieves better results. The instructions are equal for training the Pool45 Crops model. The script is image_zooms_training.py, and first the path to the database should be configured. The default paths are the following:
-
-    # path of PASCAL VOC 2012 or other database to use for training
-    path_voc = "./VOC2012/"
-    # path of other PASCAL VOC dataset, if you want to train with 2007 and 2012 train datasets
-    path_voc2 = "./VOC2007/"
-    # path of where to store the models
-    path_model = "../models_image_zooms"
-    # path of where to store visualizations of search sequences
-    path_testing_folder = '../testing_visualizations'
-    # path of VGG16 weights
-    path_vgg = "../vgg16_weights.h5"
-
-But you can change them to point to your own locations.
 
 The training of the models enables checkpointing, so you should indicate which epoch you are going to train when running the script. If you are training it from scratch, then the training command should be:
 
