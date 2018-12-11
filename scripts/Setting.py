@@ -1,13 +1,16 @@
 import numpy as np
 
 # @ Epoch set:
-epochs_id = 0
-epochs = 10
-train_size = 500
-test_size = 10
+# epochs_id = 0
+# epochs = 10
+# train_size = 100
+# test_size = 10
+
+
 # @ 1 if you want to obtain visualizations of the search for objects
-bool_draw = 0
-bool_draw_test = 1
+# bool_draw = 0
+# bool_draw_test = 1
+
 # @ Which class to train:
 class_id = 3
 
@@ -20,7 +23,8 @@ only_first_object = 1  # @whether only search the first object while testing
 # @ The dir info:
 path_dataset = './../../VOC2012'
 path_vgg16 = './../../vgg16_weights.h5'
-path_testing_folder = './../../img'
+path_testing_folder = './../../img_test'
+path_training_folder = './../../img_train'
 path_model = "./../../models_image_zooms"
 path_test_dataset = './../../VOC2012'
 use_vgg_weight = False

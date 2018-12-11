@@ -87,11 +87,12 @@ def main():
             while (status == 1) and (step < step_num_test):
                 step += 1
                 q_value = rl_model.predict(state.T, batch_size=1)
-
                 action = (np.argmax(q_value)) + 1
+
                 if action == 6:
-                    offset = 0
+                    offset = (0, 0)
                     status = 0
+
                     if step == 1:
                         absolute_status = False
                     if only_first_object == 1:
@@ -99,9 +100,12 @@ def main():
 
                     image_for_search = mask_image_with_mean_background(region_mask, image_for_search)
                     region_image = image_for_search
-                if not action == 6:
-                    region_image, region_mask, offset, mask_size = agent_move_mask(action, original_shape,
+
+                else:
+                    region_image, region_mask, offset, size_mask = agent_move_mask(action, original_shape,
                                                                                    size_mask, offset, region_image)
+
+                    print(region_image.shape)
                     draw_sequences_test(step, action, q_value, draw, region_image, background, path_testing_folder,
                                         region_mask, image_name, bool_draw_test)
 
@@ -109,6 +113,9 @@ def main():
                 new_state = get_state(region_image, history_vector, model_vgg)
                 state = new_state
 
+
+test_size = int(input('Enter the Test Size (How Many Pics):\n'))
+bool_draw_test = int(input('Whether to store the visualization pics (1 for Yes/ 0 for No): \n'))
 
 main()
 

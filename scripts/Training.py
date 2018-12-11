@@ -17,16 +17,6 @@ info:
 read images, gain image ground truth of bounding box, gain image id
 '''
 
-dataset = 'trainval'
-
-image_names = load_image_names(dataset)
-# image_labels = load_image_labels(dataset)
-# images = obtain_images(image_names) // Don't get images at one step, gain single image during the loop
-
-# @The structure of annotations is [object1[id, x_min, x_max, y_min, y_max], object2...]
-annotations = gain_annotations(image_names)
-print('images reading done')
-
 
 def build_model(epochs_id_input):
     #  build vgg16 model here
@@ -137,7 +127,7 @@ def main():
                 ''' Remove this if-clause here, seems useless - by Chenyu
                 if step > step_num:
                     background = draw_sequences(epoch_index, object_index, step, action, draw, region_image, background,
-                                                path_testing_folder, iou, reward, gt_mask, region_mask, image_name,
+                                                path_training_folder, iou, reward, gt_mask, region_mask, image_name,
                                                 bool_draw)
                     step += 1
                 '''
@@ -156,7 +146,7 @@ def main():
                     # @q_value is 6-dims for each action
 
                     background = draw_sequences(epoch_index, object_index, step, action, draw, region_image,
-                                                background, path_testing_folder, iou, reward, gt_mask, region_mask,
+                                                background, path_training_folder, iou, reward, gt_mask, region_mask,
                                                 image_name, bool_draw)
                     step += 1
 
@@ -184,7 +174,7 @@ def main():
                         gt_mask = gt_masks[:, :, iou_index]
                         reward = get_reward_trigger(new_iou)
                         background = draw_sequences(epoch_index, object_index, step, action, draw, region_image,
-                                                    background, path_testing_folder, iou, reward, gt_mask, region_mask,
+                                                    background, path_training_folder, iou, reward, gt_mask, region_mask,
                                                     image_name, bool_draw)
                         step += 1
 
@@ -227,7 +217,7 @@ def main():
                         gt_mask = gt_masks[:, :, iou_index]
                         background = draw_sequences(epoch_index, object_index, step, action,
                                                     draw, region_image, background,
-                                                    path_testing_folder, iou, reward, gt_mask, region_mask, image_name,
+                                                    path_training_folder, iou, reward, gt_mask, region_mask, image_name,
                                                     bool_draw)
                         reward = get_reward_movement(iou, new_iou)
                         iou = new_iou
@@ -294,11 +284,19 @@ def main():
         for t in range(np.size(rl_models)):
             try:
                 if t == (class_id - 1):
-                    string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
-                    string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
-                    model = rl_models[0][t]
-                    model.save_weights(string, overwrite=True)
-                    model.save_weights(string2, overwrite=True)
+                    if checkpoint == 1:
+                        string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
+                        string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
+                        model = rl_models[0][t]
+                        model.save_weights(string, overwrite=True)
+                        model.save_weights(string2, overwrite=True)
+                    else:
+                        # string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
+                        string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
+                        model = rl_models[0][t]
+                        # model.save_weights(string, overwrite=True)
+                        model.save_weights(string2, overwrite=True)
+
             except:
                 print('model ' + str(class_id) + ' epoch ' + str(epoch_index) + "failed")
                 pass
@@ -309,10 +307,19 @@ def main():
         print('time cost = ' + str(round(duration, 3)) + "min")
 
 
-# Read number of epoch to be trained, to make checkpointing
-# parser = argparse.ArgumentParser(description='Epoch:')
-# parser.add_argument("-n", metavar='N', type=int, default=0)
-# args = parser.parse_args()
-# epochs_id = int(args.n)
+train_size = int(input('Enter the Training Size (How Many Pics):\n').strip())
+checkpoint = int(input('Do you want to save check points for each epoch? 1 for yes, 0 for no:\n').strip())
+epochs_id = int(input("Enter the epochs_id to resume:\n").strip())
+epochs = int(input("Enter the epochs num:\n").strip())
+bool_draw = int(input('Whether to store the visualization pics (1 for Yes/ 0 for No): \n').strip())
+# class_id = int(input('Choose Object id (default = 3, bird): \n'))
+
+dataset = 'trainval'
+image_names = load_image_names(dataset)
+
+# @The structure of annotations is [object1[id, x_min, x_max, y_min, y_max], object2...]
+annotations = gain_annotations(image_names)
+print('images reading done')
+
 
 main()
