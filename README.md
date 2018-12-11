@@ -6,8 +6,9 @@ Image Zooming Method<br/>
 ## The Current Structure:
 - Project
   - VOC2012
-  - img (save pics here)
-  - vgg16_weight.h5 (pre-trained vgg16 model)
+  - img_test (save test pics here)
+  - img_train (save training process pics here)
+  - vgg16_weight.h5 (pre-trained vgg16 model) *need to be added*
   - models_image_zooms (save Q-network models here)
     - tmp models for epochs
     - final model
@@ -18,5 +19,3 @@ Image Zooming Method<br/>
       - Testing.py (use this for testing)
       - Setting.py (use this for setting paras)
       - Others
-  
-      
