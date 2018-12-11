@@ -1,10 +1,11 @@
 #### update: 
 > Please update this readme and add a log here
-12/01 update something, hello
-11/30 add git,ssh and tmux
+12/10 update this project with python3.6 and newest tensorflow and Keras<br/>
+12/01 update something, hello <br/>
+11/30 add git,ssh and tmux <br/>
 
 --------
-# About SSH and GitHub:
+# About SSH and GitHub (F.Y.I):
 #### If you don't want to use github, use ssh and scp operations to copy your files to VM and run what you want.
 1. How to set **git account** in your computer
 ```
@@ -63,7 +64,7 @@ Designing a reinforcement learning model with Deep Q-Learning algorithm in order
 **all scripts needed to be update for python3.6**
 # Enter VM
 **Please** use ssh to copy files between local hosts and VM
-# Current structures(11/30):
+# Old structures(11/30):
 - root/~#
   - rlpf
     - Hierarchical-Object-Location-in-Image
@@ -74,10 +75,7 @@ Designing a reinforcement learning model with Deep Q-Learning algorithm in order
 # Run VM background
 **Must** use tmux to run: http://louiszhai.github.io/2017/09/30/tmux/
 TMUX allow users run several program in terminal without keeping ssh coonections.
+
 # Requirements (done)
-- Python 2.7
-- install packages in requirements.txt (already add opencv-python)
-- install tensorflow 0.10.0 (with whl file, the file in this repo is for Mac OS X, see https://github.com/tensorflow/tensorflow/blob/v0.10.0rc0/tensorflow/g3doc/get_started/os_setup.md for other versions)
 - install tff LiberationMono-Regular
 - download VOC2012
-- See readme 2 for more
