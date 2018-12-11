@@ -30,11 +30,14 @@ def load_info(dataset_name=test_dataset_name):
 def main():
     image_names, labels, annotations = load_info()
     model_vgg, rl_model = build_model()
+    test_count = test_size
 
     for image_index in range(len(image_names)):
         if not labels[image_index] == '1':
             continue
-
+        if not test_size > 0:
+            break
+        test_count -= 1
         image_name = image_names[image_index]
         image = np.array(obtain_image(image_name))
         image_for_search = image
@@ -104,8 +107,6 @@ def main():
                 else:
                     region_image, region_mask, offset, size_mask = agent_move_mask(action, original_shape,
                                                                                    size_mask, offset, region_image)
-
-                    print(region_image.shape)
                     draw_sequences_test(step, action, q_value, draw, region_image, background, path_testing_folder,
                                         region_mask, image_name, bool_draw_test)
 
