@@ -2,7 +2,8 @@
 A pathetic project<br/>
 **See reference.md for reference**<br/>
 Image Zooming Method<br/>
-
+## Current Setting:
+Training Object: bird
 ## The Current Structure:
 - Project
   - VOC2012
