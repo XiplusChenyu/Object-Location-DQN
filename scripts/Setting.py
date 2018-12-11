@@ -2,10 +2,12 @@ import numpy as np
 
 # @ Epoch set:
 epochs_id = 0
-epochs = 50
-train_size = 10
+epochs = 10
+train_size = 500
+test_size = 10
 # @ 1 if you want to obtain visualizations of the search for objects
 bool_draw = 0
+bool_draw_test = 1
 # @ Which class to train:
 class_id = 3
 
@@ -25,6 +27,7 @@ use_vgg_weight = False
 
 # @ RL num
 step_num = 10
+step_num_test = 10
 gamma = 0.90
 # Each replay memory (one for each possible category) has a capacity of 100 experiences
 buffer_experience_replay = 1000
