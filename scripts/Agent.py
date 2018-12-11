@@ -27,10 +27,10 @@ def agent_move_mask(action, original_shape, mask_size, offset, region_image):
 
     # @Update the status here, crop  the image, and update the region mask:
     region_image = region_image[int(offset_aux[0]):int(offset_aux[0] + mask_size[0]),
-                                int(offset_aux[1]): int(offset_aux[1] + mask_size[1])]
+                                int(offset_aux[1]): int(offset_aux[1] + mask_size[1])]  # Crop the image
 
     region_mask[int(offset[0]): int(offset[0] + mask_size[0]),
-                int(offset[1]): int(offset[1] + mask_size[1])] = 1
+                int(offset[1]): int(offset[1] + mask_size[1])] = 1  # Mask the area we chopped
 
     return region_image, region_mask, offset, mask_size
 

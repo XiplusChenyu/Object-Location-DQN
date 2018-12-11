@@ -75,6 +75,7 @@ def feature_output(image, model):
     im = im.transpose((2, 0, 1))
     im = np.expand_dims(im, axis=0)
     inputs = [K.learning_phase()] + model.inputs
+
     # @The flatten layer is 18
     _convout1_f = K.function(inputs, [model.layers[18].output])
     return _convout1_f([0] + [im])
