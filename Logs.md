@@ -1,5 +1,6 @@
 #### update: 
-> Please update this readme and add a log here
+> Please update this readme and add a log here<
+
 12/10 update this project with python3.6 and newest tensorflow and Keras<br/>
 12/01 update something, hello <br/>
 11/30 add git,ssh and tmux <br/>
