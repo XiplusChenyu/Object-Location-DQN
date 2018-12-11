@@ -1,4 +1,5 @@
-Pull Before You Push!!!<br/>
+**Pull Before You Push!!!**<br/>
+
 Current issues:
 - There is no model weights for Vgg16
 - The training results is weired
