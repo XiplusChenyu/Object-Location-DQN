@@ -66,7 +66,7 @@ def main():
         absolute_status = True
         action = 0
         step = 0
-        q_value = 0
+        q_value = [[0]]
 
         region_image = image_for_search
         region_mask = np.ones([image.shape[0], image.shape[1]])
@@ -77,7 +77,6 @@ def main():
             '''Set History Vector'''
             # we init history vector as we are going to find another object
             history_vector = np.zeros([24])
-            state = get_state(region_image, history_vector, model_vgg)
             status = 1
 
             draw_sequences_test(step, action, q_value, draw, region_image, background, path_testing_folder,
@@ -87,9 +86,12 @@ def main():
             original_shape = size_mask
             region_mask = np.ones(size_mask)
 
+            state = get_state(region_image, history_vector, model_vgg)
+
             while (status == 1) and (step < step_num_test):
                 step += 1
                 q_value = rl_model.predict(state.T, batch_size=1)
+                print (q_value)
                 action = (np.argmax(q_value)) + 1
 
                 if action == 6:

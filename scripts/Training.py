@@ -36,7 +36,7 @@ def main():
     # RL reset
     reward = 0
     # Init replay memories
-    replay = [[] for step in range(20)]
+    replay = [[] for x in range(20)]
 
     for epoch_index in range(epochs_id, epochs_id + epochs):
         print('start epoch: ' + str(epoch_index))

@@ -54,22 +54,31 @@ def draw_sequences(i, k, step, action, draw, region_image, background, path_test
 def draw_sequences_test(step, action, qval, draw, region_image, background, path_testing_folder,
                         region_mask, image_name, save_boolean):
 
+    aux = np.asarray(region_image, np.uint8)
     img_offset = (1000 * step, 70)
     footnote_offset = (1000 * step, 550)
     q_predictions_offset = (1000 * step, 500)
     mask_img_offset = (1000 * step, 700)
 
-    img_for_paste = Image.fromarray(region_image)
+    img_for_paste = Image.fromarray(aux)
     background.paste(img_for_paste, img_offset)
 
     mask_img = Image.fromarray(255 * region_mask)
     background.paste(mask_img, mask_img_offset)
-    footnote = 'action: ' + str(action)
-    q_val_predictions_text = str(qval)
+    footnote = 'action: ' + str(string_for_action(action))
+
+    nice = []
+
+    for q_value in qval[0]:
+        nice.append(round(q_value, 3))
+
+    q_val_predictions_text = str(nice)
+
     draw.text(footnote_offset, footnote, (0, 0, 0), font=font)
     draw.text(q_predictions_offset, q_val_predictions_text, (0, 0, 0), font=font)
     file_name = path_testing_folder + '/' + image_name + '.png'
 
     if save_boolean == 1:
         background.save(file_name)
+
     return background

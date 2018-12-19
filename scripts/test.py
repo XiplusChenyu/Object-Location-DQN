@@ -5,4 +5,5 @@ import numpy as np
 
 results = np.zeros([5, 1])
 last_matrix = np.zeros([5])
-print (last_matrix, results)
+replay = [[] for i in range(20)]
+print(replay)

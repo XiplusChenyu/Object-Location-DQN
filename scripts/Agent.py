@@ -21,9 +21,9 @@ def agent_move_mask(action, original_shape, mask_size, offset, region_image):
                   offset[1] + mask_size[1] * scale_mask)
     elif action == 5:
         offset_aux = (mask_size[0] * scale_mask / 2,
-                      mask_size[0] * scale_mask / 2)
+                      mask_size[1] * scale_mask / 2)
         offset = (offset[0] + mask_size[0] * scale_mask / 2,
-                  offset[1] + mask_size[0] * scale_mask / 2)
+                  offset[1] + mask_size[1] * scale_mask / 2)
 
     # @Update the status here, crop  the image, and update the region mask:
     region_image = region_image[int(offset_aux[0]):int(offset_aux[0] + mask_size[0]),
