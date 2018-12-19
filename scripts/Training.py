@@ -18,27 +18,34 @@ read images, gain image ground truth of bounding box, gain image id
 '''
 
 
-def build_model(epochs_id_input):
+def build_model():
     #  build vgg16 model here
     model_vgg = vgg16_model()
+
     #  build reinforcement model here:
-    if epochs_id_input == 0:
-        rl_models = qn_pascal("0", class_id)
-    else:
-        rl_models = qn_pascal(path_model, class_id)
-    return model_vgg, rl_models
+    rl_model = q_network('0')
+    return model_vgg, rl_model
+    # if epochs_id_input == 0:
+    #     rl_models = qn_pascal("0", class_id)
+    # else:
+    #     rl_models = qn_pascal(path_model, class_id)
+    # return model_vgg, rl_models
 
 
 def main():
-    model_vgg, rl_models = build_model(epochs_id)
+    # model_vgg, rl_models = build_model(epochs_id)
+    model_vgg, rl_model = build_model()
     epsilon_value = epsilon
 
-    # RL reset
-    reward = 0
     # Init replay memories
-    replay = [[] for x in range(20)]
+    replay = []
+    h = 0
+    # RL reset
+    # reward = 0
 
-    for epoch_index in range(epochs_id, epochs_id + epochs):
+    # replay = [[] for x in range(20)]
+
+    for epoch_index in range(epochs):
         print('start epoch: ' + str(epoch_index))
         time1 = time.time()
 
@@ -74,7 +81,7 @@ def main():
                 '''RL paras init'''
                 region_image = picture
                 step = 0
-                new_iou = 0
+                # new_iou = 0
                 offset = (0, 0)
 
                 '''Start to initialize the RL part'''
@@ -85,7 +92,7 @@ def main():
                 history_vector = np.zeros([24])  # @ the history vectors is the 6 actions*pass 4 steps
 
                 '''Set Ground truth mask for one object'''
-                gt_mask = gt_masks[:, :, object_index]
+                # gt_mask = gt_masks[:, :, object_index]
                 mask_size = picture_size
                 original_shape = mask_size
                 region_mask = np.ones(picture_size)
@@ -143,8 +150,8 @@ def main():
                 while (status == 1) & (step < step_num) & not_finished:
 
                     # @Retrieve Rl models
-                    category = int(objects[object_index] - 1)
-                    rl_model = rl_models[0][category]
+                    # category = int(objects[object_index] - 1)  -- Category used for multiple class detection, no need
+                    # rl_model = rl_models[0][category]
 
                     # @Calculate Q value for each steps
                     q_value = rl_model.predict(state.T, batch_size=1)
@@ -188,7 +195,7 @@ def main():
                     else:
                         region_image, region_mask, offset, mask_size = agent_move_mask(action, original_shape,
                                                                                        mask_size, offset, region_image)
-                        # Replaced by function
+                        # Replaced by function -- See agent.py
                         # region_mask = np.zeros(original_shape)
                         # mask_size = (mask_size[0] * scale_subregion, mask_size[1] * scale_subregion)
                         #
@@ -234,17 +241,17 @@ def main():
                     new_state = get_state(region_image, history_vector, model_vgg)
 
                     # Experience replace storage, stores past experience as target
-                    if len(replay[category]) < buffer_experience_replay:
-                        replay[category].append((state, action, reward, new_state))
+                    if len(replay) < buffer_experience_replay:
+                        replay.append((state, action, reward, new_state))
                     else:
-                        if h[category] < (buffer_experience_replay - 1):
-                            h[category] += 1
+                        if h < (buffer_experience_replay - 1):
+                            h += 1
                         else:
-                            h[category] = 0
+                            h = 0
 
-                        h_aux = int(h[category])
-                        replay[category][h_aux] = (state, action, reward, new_state)
-                        mini_batch = random.sample(replay[category], batch_size)  # arbitrary choose mini_batch
+                        # h_aux = int(h[category])
+                        replay[h] = (state, action, reward, new_state)
+                        mini_batch = random.sample(replay, batch_size)  # arbitrary choose mini_batch
 
                         x_train = []
                         y_train = []
@@ -273,9 +280,10 @@ def main():
                         x_train = x_train[:, :, 0]
                         y_train = y_train[:, :, 0]
 
-                        rl_model.fit(x_train, y_train, batch_size=batch_size, epochs=1, verbose=1)
+                        rl_model.fit(x_train, y_train, batch_size=batch_size, epochs=1, verbose=0)
 
-                        rl_models[0][category] = rl_model
+                        # rl_models[0][category] = rl_model
+
                         state = new_state
 
                     if action == 6:
@@ -289,25 +297,29 @@ def main():
         if epsilon_value > 0.1:
             epsilon_value -= 0.1
 
-        for t in range(np.size(rl_models)):
-            try:
-                if t == (class_id - 1):
-                    if checkpoint == 1:
-                        string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
-                        string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
-                        model = rl_models[0][t]
-                        model.save_weights(string, overwrite=True)
-                        model.save_weights(string2, overwrite=True)
-                    else:
-                        # string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
-                        string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
-                        model = rl_models[0][t]
-                        # model.save_weights(string, overwrite=True)
-                        model.save_weights(string2, overwrite=True)
+        model_name = path_model + '/model' + str(class_id) + '.h5'
+        rl_model.save_weights(model_name, overwrite=True)
 
-            except:
-                print('model ' + str(class_id) + ' epoch ' + str(epoch_index) + "failed")
-                pass
+
+        # for t in range(np.size(rl_models)):
+        #     try:
+        #         if t == (class_id - 1):
+        #             if checkpoint == 1:
+        #                 string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
+        #                 string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
+        #                 model = rl_models[0][t]
+        #                 model.save_weights(string, overwrite=True)
+        #                 model.save_weights(string2, overwrite=True)
+        #             else:
+        #                 # string = path_model + '/model' + str(class_id) + '_epoch_' + str(epoch_index) + '.h5'
+        #                 string2 = path_model + '/model' + str(class_id) + '.h5'  # Record the newest one
+        #                 model = rl_models[0][t]
+        #                 # model.save_weights(string, overwrite=True)
+        #                 model.save_weights(string2, overwrite=True)
+        #
+        #     except:
+        #         print('model ' + str(class_id) + ' epoch ' + str(epoch_index) + "failed")
+        #         pass
 
         print('end epoch: ' + str(epoch_index))
         time2 = time.time()
@@ -316,20 +328,26 @@ def main():
 
 
 train_size = int(input('Enter the Training Size (How Many Pics):\n').strip())
-checkpoint = 0
-epochs_id = 0
+
+# checkpoint = 0
+# epochs_id = 0
 # checkpoint = int(input('Do you want to save check points for each epoch? 1 for yes, 0 for no:\n').strip())
 # epochs_id = int(input("Enter the epochs_id to resume:\n").strip())
+
 epochs = int(input("Enter the epochs num:\n").strip())
 bool_draw = int(input('Whether to store the visualization pics (1 for Yes/ 0 for No): \n').strip())
 # class_id = int(input('Choose Object id (default = 3, bird): \n'))
 
-dataset = 'trainval'
+dataset = 'bird_train'
 image_names = load_image_names(dataset)
+if train_size > len(image_names):
+    train_size = len(image_names)
+    print('training size overflow')
 
 # @The structure of annotations is [object1[id, x_min, x_max, y_min, y_max], object2...]
 annotations = gain_annotations(image_names)
 print('images reading done')
+print('training size = ' + str(train_size))
 
 
 main()

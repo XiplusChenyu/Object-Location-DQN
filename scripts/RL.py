@@ -28,7 +28,7 @@ import random
 
 def get_reward_movement(iou, new_iou):
     if new_iou > iou:
-        reward = 1
+        reward = 0
     else:
         reward = - 1
     return reward
@@ -87,7 +87,6 @@ def q_network(weights_path):
     rl_model.add(Dense(1024, activation='relu', kernel_initializer=lambda shape: VarianceScaling(scale=0.01)(shape)))
     rl_model.add(Dropout(0.2))
     rl_model.add(Dense(6, activation='linear', kernel_initializer=lambda shape: VarianceScaling(scale=0.01)(shape)))
-    rl_model.add(Activation('linear'))
     adam = Adam(lr=1e-6)
     rl_model.compile(loss='mse', optimizer=adam)
 

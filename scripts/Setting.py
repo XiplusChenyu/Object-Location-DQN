@@ -38,7 +38,7 @@ buffer_experience_replay = 1000
 # Pointer to where to store the last experience in the experience replay buffer,
 # actually there is a pointer for each PASCAL category, in case all categories
 # are trained at the same time
-h = np.zeros([20])
+# h = np.zeros([20])
 batch_size = 100
 
 

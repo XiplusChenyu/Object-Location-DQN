@@ -35,10 +35,9 @@ def draw_sequences(i, k, step, action, draw, region_image, background, path_test
     text_offset = (1000 * step, 550)
     masked_image_offset = (1000 * step, 1400)
     mask_offset = (1000 * step, 700)
-    action_string = string_for_action(action)
 
     iou = round(iou, 3)
-    footnote = 'action: ' + action_string + ' ' + 'reward: ' + str(reward) + ' Iou:' + str(iou)
+    footnote = 'action: ' + string_for_action(action) + ' ' + 'reward: ' + str(reward) + ' Iou:' + str(iou)
     draw.text(text_offset, str(footnote), (0, 0, 0), font=font)
 
     img_for_paste = Image.fromarray(region_image)
@@ -53,7 +52,8 @@ def draw_sequences(i, k, step, action, draw, region_image, background, path_test
 
 def draw_sequences_test(step, action, qval, draw, region_image, background, path_testing_folder,
                         region_mask, image_name, save_boolean):
-
+    if not save_boolean == 1:
+        return
     aux = np.asarray(region_image, np.uint8)
     img_offset = (1000 * step, 70)
     footnote_offset = (1000 * step, 550)
@@ -77,8 +77,6 @@ def draw_sequences_test(step, action, qval, draw, region_image, background, path
     draw.text(footnote_offset, footnote, (0, 0, 0), font=font)
     draw.text(q_predictions_offset, q_val_predictions_text, (0, 0, 0), font=font)
     file_name = path_testing_folder + '/' + image_name + '.png'
-
-    if save_boolean == 1:
-        background.save(file_name)
+    background.save(file_name)
 
     return background
