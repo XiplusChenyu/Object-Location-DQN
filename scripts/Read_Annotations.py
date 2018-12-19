@@ -94,7 +94,10 @@ def create_masks(annotation, image_shape):
     object_num = len(annotation)
     masks = np.zeros([image_shape[0], image_shape[1], object_num])
     for i in range(object_num):
-        masks[annotation[i, 3]:annotation[i, 4], annotation[i, 1]:annotation[i, 2], i] = 1
+
+        masks[annotation[i, 3]:annotation[i, 4],
+              annotation[i, 1]:annotation[i, 2], i] = 1
+
     return masks
 
 

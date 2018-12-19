@@ -30,17 +30,18 @@ that overlaps more with the visual region, so that we can calculate the rewards 
 
 
 def iou_iteration(gt_masks, region_mask, objects, class_id, last_matrix, available_objects):
-    results = np.zeros([len(objects)])
+    results = np.zeros(len(objects))
 
     for i in range(len(objects)):
-        results[i] = -1
         if not objects[i] == class_id:
             continue
+
         if not available_objects[i] == 1:
-            continue
-        gt_mask = gt_masks[:, :, i]
-        iou = iou_calculator(region_mask, gt_mask)
-        results[i] = iou
+            results[i] = -1  # Change the value here
+        else:
+            gt_mask = gt_masks[:, :, i]
+            iou = iou_calculator(region_mask, gt_mask)
+            results[i] = iou
 
     index = np.argmax(results)  # Which object has the most overlap value with current region.
     old_iou = last_matrix[index]

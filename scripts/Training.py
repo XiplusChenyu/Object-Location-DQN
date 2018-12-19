@@ -46,9 +46,9 @@ def main():
         for pic_index in range(train_size):
             masked = 0  # Record if we have masked this picture, i.e, if we have trained one object within this picture
             not_finished = 1  # Record if we already done with this picture
-            image_name = image_names[pic_index]
 
             # @ Read picture info
+            image_name = image_names[pic_index]
             picture = np.array(obtain_image(image_name))
             picture_annotation = annotations[pic_index]
 
@@ -63,16 +63,25 @@ def main():
             # @For each objects in this picture:
             for object_index in range(len(objects)):
 
+                # @skip Objects not belongs to Class
+                if not objects[object_index] == class_id:
+                    continue
+
                 '''visualization here'''
                 background = Image.new('RGBA', (10000, 2500), (255, 255, 255, 255))
                 draw = ImageDraw.Draw(background)
-                if not objects[object_index] == class_id:
-                    continue
 
                 '''RL paras init'''
                 region_image = picture
                 step = 0
                 new_iou = 0
+                offset = (0, 0)
+
+                '''Start to initialize the RL part'''
+                # this matrix stores the IoU of each object of the ground-truth, just in case
+                # the agent changes of observed object
+
+                last_matrix = np.zeros(len(objects))
                 history_vector = np.zeros([24])  # @ the history vectors is the 6 actions*pass 4 steps
 
                 '''Set Ground truth mask for one object'''
@@ -81,13 +90,6 @@ def main():
                 original_shape = mask_size
                 region_mask = np.ones(picture_size)
                 old_region_mask = region_mask
-
-                '''Start to initialize the RL part'''
-                # this matrix stores the IoU of each object of the ground-truth, just in case
-                # the agent changes of observed object
-
-                last_matrix = np.zeros(len(objects))
-                offset = (0, 0)
 
                 ''' Test if the pictures is masked before'''
                 # If the ground truth object is already masked by other already found masks, do not
@@ -121,7 +123,10 @@ def main():
                 iou, new_iou, last_matrix, iou_index = iou_iteration(gt_masks, region_mask,
                                                                      objects, class_id, last_matrix,
                                                                      objects_available)
+
                 gt_mask = gt_masks[:, :, iou_index]
+                # the first object which overlaps most with the whole picture
+
                 iou = new_iou
 
                 ''' Remove this if-clause here, seems useless - by Chenyu
@@ -173,6 +178,7 @@ def main():
                                                                              objects_available)
                         gt_mask = gt_masks[:, :, iou_index]
                         reward = get_reward_trigger(new_iou)
+
                         background = draw_sequences(epoch_index, object_index, step, action, draw, region_image,
                                                     background, path_training_folder, iou, reward, gt_mask, region_mask,
                                                     image_name, bool_draw)
@@ -215,10 +221,12 @@ def main():
                                                                              objects, class_id, last_matrix,
                                                                              objects_available)
                         gt_mask = gt_masks[:, :, iou_index]
+
                         background = draw_sequences(epoch_index, object_index, step, action,
                                                     draw, region_image, background,
                                                     path_training_folder, iou, reward, gt_mask, region_mask, image_name,
                                                     bool_draw)
+
                         reward = get_reward_movement(iou, new_iou)
                         iou = new_iou
 
@@ -236,7 +244,7 @@ def main():
 
                         h_aux = int(h[category])
                         replay[category][h_aux] = (state, action, reward, new_state)
-                        mini_batch = random.sample(replay[category], batch_size)
+                        mini_batch = random.sample(replay[category], batch_size)  # arbitrary choose mini_batch
 
                         x_train = []
                         y_train = []
@@ -246,9 +254,9 @@ def main():
 
                             old_q_value = rl_model.predict(old_state.T, batch_size=1)
                             new_q_value = rl_model.predict(new_state.T, batch_size=1)
-                            maxQ = np.max(new_q_value)
 
-                            y = np.zeros([1, 6])
+                            maxQ = np.max(new_q_value)
+                            # y = np.zeros([1, 6])
                             y = old_q_value.T
 
                             if not action == 6:
@@ -270,13 +278,13 @@ def main():
                         rl_models[0][category] = rl_model
                         state = new_state
 
-                        if action == 6:
-                            status = 0
-                            masked = 1
-                            picture = mask_image_with_mean_background(gt_mask, picture)
-                        else:
-                            masked = 0
-                    objects_available[object_index] = 0
+                    if action == 6:
+                        status = 0
+                        masked = 1
+                        picture = mask_image_with_mean_background(gt_mask, picture)
+                    else:
+                        masked = 0
+                objects_available[object_index] = 0
 
         if epsilon_value > 0.1:
             epsilon_value -= 0.1
@@ -308,8 +316,10 @@ def main():
 
 
 train_size = int(input('Enter the Training Size (How Many Pics):\n').strip())
-checkpoint = int(input('Do you want to save check points for each epoch? 1 for yes, 0 for no:\n').strip())
-epochs_id = int(input("Enter the epochs_id to resume:\n").strip())
+checkpoint = 0
+epochs_id = 0
+# checkpoint = int(input('Do you want to save check points for each epoch? 1 for yes, 0 for no:\n').strip())
+# epochs_id = int(input("Enter the epochs_id to resume:\n").strip())
 epochs = int(input("Enter the epochs num:\n").strip())
 bool_draw = int(input('Whether to store the visualization pics (1 for Yes/ 0 for No): \n').strip())
 # class_id = int(input('Choose Object id (default = 3, bird): \n'))

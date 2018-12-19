@@ -35,7 +35,7 @@ def main():
     for image_index in range(len(image_names)):
         if not labels[image_index] == '1':
             continue
-        if not test_size > 0:
+        if not test_count > 0:
             break
         test_count -= 1
         image_name = image_names[image_index]

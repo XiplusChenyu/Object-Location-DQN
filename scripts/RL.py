@@ -43,24 +43,33 @@ def get_reward_trigger(new_iou):
 
 
 def get_state(image, history_vector, model):
+
     image_feature = feature_output(image, model)
     image_feature = np.reshape(image_feature, (visual_descriptor_size, 1))
+
     history_vector = np.reshape(history_vector, (number_of_actions * actions_of_history, 1))
     state = np.vstack((image_feature, history_vector))
+
     return state
 
 
 def update_history_vector(history_vector, action):
+
+    # Do not calculate the start action
     action_vector = np.zeros(number_of_actions)
     action_vector[action-1] = 1
+
     size_history_vector = np.size(np.nonzero(history_vector))
     updated_history_vector = np.zeros(number_of_actions*actions_of_history)
     if size_history_vector < actions_of_history:
         aux2 = 0
-        for l in range(number_of_actions*size_history_vector, number_of_actions*size_history_vector+number_of_actions - 1):
+        for l in range(number_of_actions*size_history_vector,
+                       number_of_actions*size_history_vector+number_of_actions - 1):
+
             history_vector[l] = action_vector[aux2]
             aux2 += 1
         return history_vector
+
     else:
         for j in range(0, number_of_actions*(actions_of_history-1) - 1):
             updated_history_vector[j] = history_vector[j+number_of_actions]
@@ -81,8 +90,10 @@ def q_network(weights_path):
     rl_model.add(Activation('linear'))
     adam = Adam(lr=1e-6)
     rl_model.compile(loss='mse', optimizer=adam)
+
     if not weights_path == '0':
         rl_model.load_weights(weights_path)
+
     return rl_model
 
 
