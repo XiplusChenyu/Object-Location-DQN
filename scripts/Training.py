@@ -265,7 +265,7 @@ def main():
                         x_train = x_train[:, :, 0]
                         y_train = y_train[:, :, 0]
 
-                        hist = rl_model.fit(x_train, y_train, batch_size=batch_size, epochs=1, verbose=0)
+                        rl_model.fit(x_train, y_train, batch_size=batch_size, epochs=1, verbose=1)
 
                         rl_models[0][category] = rl_model
                         state = new_state

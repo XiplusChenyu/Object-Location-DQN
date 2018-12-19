@@ -8,12 +8,17 @@ from Setting import *
 import cv2
 import numpy as np
 from keras import backend as K
-
+from keras.applications.vgg16 import VGG16
 
 '''build model'''
 
 
-def vgg16_model(path=path_vgg16, use_weight=use_vgg_weight):
+def vgg16_model():
+    model = VGG16(include_top=True, weights='imagenet')
+    return model
+
+
+def vgg16_model2(path=path_vgg16, use_weight=use_vgg_weight):
     data_format = 'channels_first'
     model = Sequential()
     model.add(ZeroPadding2D((1,1), data_format=data_format, input_shape=(3, 224, 224), name='b1z1'))
@@ -72,14 +77,15 @@ def feature_output(image, model):
         im[:, :, 0] -= 103.939
         im[:, :, 1] -= 116.779
         im[:, :, 2] -= 123.68
-    im = im.transpose((2, 0, 1))
+    # im = im.transpose((2, 0, 1))
     im = np.expand_dims(im, axis=0)
     inputs = [K.learning_phase()] + model.inputs
 
     # @The flatten layer is 18
-    _convout1_f = K.function(inputs, [model.layers[18].output])
-    return _convout1_f([0] + [im])
+    flatten_output = K.function(inputs, [model.layers[19].output])
+    return flatten_output([0] + [im])
+
 
 # model = vgg16_model()
 # model.summary()
-# print(model.layers[18])
+# print(model.layers[19])
