@@ -26,10 +26,10 @@ Ignore the data processing, model saving and the visualization part.<br/>
 
 ### The input arguments:
 - Training Size: # pics to train with
-- Checkpoint: whether save models as one epoch finished
-- Epochs_id: which epoch to resume training, if you saved previous models
+- Checkpoint(disabled): whether save models as one epoch finished
+- Epochs_id(disabled): which epoch to resume training, if you saved previous models
 - Epochs: # epochs to train
-- Bool_draw: whether save visualization pics when training 
+- Bool_draw(disabled): whether save visualization pics when training 
 
 ### Several Factors:
 - **Mask**: We use a 1/0 mask to simulate the cropping.
