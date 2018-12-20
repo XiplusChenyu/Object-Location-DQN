@@ -30,11 +30,11 @@ path_test_dataset = './../../VOC2012'
 use_vgg_weight = False
 
 # @ RL num
-step_num = 10
-step_num_test = 10
+step_num = 8
+step_num_test = 8
 gamma = 0.90
 # Each replay memory (one for each possible category) has a capacity of 100 experiences
-buffer_experience_replay = 1000
+buffer_experience_replay = 500
 # Pointer to where to store the last experience in the experience replay buffer,
 # actually there is a pointer for each PASCAL category, in case all categories
 # are trained at the same time

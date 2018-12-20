@@ -22,7 +22,7 @@ def build_model():
     #  build vgg16 model here
     model_vgg = vgg16_model()
 
-    #  build reinforcement model here:
+    #  build reinforcement model here!
     rl_model = q_network('0')
     return model_vgg, rl_model
     # if epochs_id_input == 0:
@@ -85,22 +85,16 @@ def main():
                 offset = (0, 0)
 
                 '''Start to initialize the RL part'''
-                # this matrix stores the IoU of each object of the ground-truth, just in case
-                # the agent changes of observed object
-
                 last_matrix = np.zeros(len(objects))
                 history_vector = np.zeros([24])  # @ the history vectors is the 6 actions*pass 4 steps
 
                 '''Set Ground truth mask for one object'''
-                # gt_mask = gt_masks[:, :, object_index]
                 mask_size = picture_size
                 original_shape = mask_size
                 region_mask = np.ones(picture_size)
                 old_region_mask = region_mask
 
                 ''' Test if the pictures is masked before'''
-                # If the ground truth object is already masked by other already found masks, do not
-                # use it for training
                 if masked == 1:
                     for object_index2 in range(len(objects)):
                         overlap = overlap_calculator(old_region_mask, gt_masks[:, :, object_index2])
@@ -109,16 +103,6 @@ def main():
 
                 if np.count_nonzero(objects_available) == 0:
                     not_finished = 0
-
-                ''' This part seems useless - by Chenyu
-                #calculate the IoU for the first time, with mask masked the whole picture
-                iou, new_iou, last_matrix, iou_index = iou_iteration(gt_masks, region_mask,
-                                                                     objects, class_id, last_matrix,
-                                                                     objects_available)
-                # iou = new_iou
-
-                gt_mask = gt_masks[:, :, iou_index]  # Start with the object, the one with maximum iou
-                '''
 
                 '''The initial status'''
                 # status indicates whether the agent is still alive and has not triggered the terminal action
@@ -136,23 +120,10 @@ def main():
 
                 iou = new_iou
 
-                ''' Remove this if-clause here, seems useless - by Chenyu
-                if step > step_num:
-                    background = draw_sequences(epoch_index, object_index, step, action, draw, region_image, background,
-                                                path_training_folder, iou, reward, gt_mask, region_mask, image_name,
-                                                bool_draw)
-                    step += 1
-                '''
-
                 # @ Use vgg16 to get the state descriptor
                 state = get_state(region_image, history_vector, model_vgg)
 
                 while (status == 1) & (step < step_num) & not_finished:
-
-                    # @Retrieve Rl models
-                    # category = int(objects[object_index] - 1)  -- Category used for multiple class detection, no need
-                    # rl_model = rl_models[0][category]
-
                     # @Calculate Q value for each steps
                     q_value = rl_model.predict(state.T, batch_size=1)
                     # @q_value is 6-dims for each action
@@ -262,12 +233,11 @@ def main():
                             old_q_value = rl_model.predict(old_state.T, batch_size=1)
                             new_q_value = rl_model.predict(new_state.T, batch_size=1)
 
-                            maxQ = np.max(new_q_value)
-                            # y = np.zeros([1, 6])
+                            max_q_value = np.max(new_q_value)
                             y = old_q_value.T
 
                             if not action == 6:
-                                update = (reward + (gamma * maxQ))
+                                update = (reward + (gamma * max_q_value))
                             else:
                                 update = reward
 
@@ -338,7 +308,7 @@ epochs = int(input("Enter the epochs num:\n").strip())
 bool_draw = int(input('Whether to store the visualization pics (1 for Yes/ 0 for No): \n').strip())
 # class_id = int(input('Choose Object id (default = 3, bird): \n'))
 
-dataset = 'bird_train'
+dataset = 'trainval'
 image_names = load_image_names(dataset)
 if train_size > len(image_names):
     train_size = len(image_names)

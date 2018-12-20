@@ -91,7 +91,7 @@ def main():
             while (status == 1) and (step < step_num_test):
                 step += 1
                 q_value = rl_model.predict(state.T, batch_size=1)
-                print (q_value)
+                # print (q_value)
                 action = (np.argmax(q_value)) + 1
 
                 if action == 6:

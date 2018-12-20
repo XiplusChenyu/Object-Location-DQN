@@ -37,7 +37,7 @@ def draw_sequences(i, k, step, action, draw, region_image, background, path_test
     mask_offset = (1000 * step, 700)
 
     iou = round(iou, 3)
-    footnote = 'action: ' + string_for_action(action) + ' ' + 'reward: ' + str(reward) + ' Iou:' + str(iou)
+    footnote = 'action: ' + string_for_action(action) + ' ' + 'reward: ' + str(reward) + ' Iou:' + str(round(iou, 3))
     draw.text(text_offset, str(footnote), (0, 0, 0), font=font)
 
     img_for_paste = Image.fromarray(region_image)

@@ -8,27 +8,9 @@ from keras.initializers import VarianceScaling
 import random
 
 
-# def epsilon_greedy(value, e, seed=None):
-#     value = value[0]
-#     assert len(value.shape) == 1
-#     assert 0 <= e <= 1
-#
-#     if seed is not None:
-#         np.random.seed(seed)
-#     n = value.size
-#     x = e / n
-#     explore = random.uniform(0, 1) < x
-#     greedy_choice = max(value)
-#     if explore:
-#         action = random.randint(0, value.size - 1)
-#     else:
-#         action = int(np.argwhere(value == greedy_choice)[0])
-#     return action
-
-
 def get_reward_movement(iou, new_iou):
     if new_iou > iou:
-        reward = 0
+        reward = 1
     else:
         reward = - 1
     return reward
@@ -96,19 +78,16 @@ def q_network(weights_path):
     return rl_model
 
 
-def qn_pascal(weights_path, object_id):
-    q_networks = []
-    if weights_path == "0":
-        # 20 for 20 classes
-        for i in range(20):
-            q_networks.append(q_network("0"))
-    else:
-        for i in range(20):
-            if i == (object_id - 1):
-                q_networks.append(q_network(weights_path + "/model" + str(object_id) + ".h5"))
-            else:
-                q_networks.append(q_network("0"))
-    return np.array([q_networks])
-
-# list = qn_pascal('0', 0)
-# print (list[0])
+# def qn_pascal(weights_path, object_id):
+#     q_networks = []
+#     if weights_path == "0":
+#         # 20 for 20 classes
+#         for i in range(20):
+#             q_networks.append(q_network("0"))
+#     else:
+#         for i in range(20):
+#             if i == (object_id - 1):
+#                 q_networks.append(q_network(weights_path + "/model" + str(object_id) + ".h5"))
+#             else:
+#                 q_networks.append(q_network("0"))
+#     return np.array([q_networks])
