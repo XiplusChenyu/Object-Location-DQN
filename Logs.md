@@ -1,5 +1,6 @@
 #### update: 
 > Please add logs here 
+12/20 Change the steps num to 8 and start training<br/>
 12/14 add an optimizer in RL model<br/>
 12/14 add 
 12/10 update this project with python3.6 and newest tensorflow and Keras<br/>
