@@ -2,7 +2,6 @@
 > Please add logs here<br/>
 12/20 Change the steps num to 8 and start training<br/>
 12/14 add an optimizer in RL model<br/>
-12/14 add 
 12/10 update this project with python3.6 and newest tensorflow and Keras<br/>
 12/01 update something, hello <br/>
 11/30 add git,ssh and tmux <br/>
