@@ -31,6 +31,7 @@ def main():
     image_names, labels, annotations = load_info()
     model_vgg, rl_model = build_model()
     test_count = test_size
+    IoU_storage = []
 
     for image_index in range(len(image_names)):
         if not labels[image_index] == '1':

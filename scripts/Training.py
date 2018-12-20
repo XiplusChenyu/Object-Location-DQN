@@ -268,7 +268,9 @@ def main():
             epsilon_value -= 0.1
 
         model_name = path_model + '/model' + str(class_id) + '.h5'
+        model_name2 = path_model + '/model' + str(class_id) + str(epoch_index) + '.h5'
         rl_model.save_weights(model_name, overwrite=True)
+        rl_model.save_weights(model_name2, overwrite=True)
 
 
         # for t in range(np.size(rl_models)):
