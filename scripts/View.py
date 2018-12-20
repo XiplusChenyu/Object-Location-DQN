@@ -2,8 +2,8 @@ from PIL import Image, ImageFont
 import numpy as np
 
 
-path_font = "/usr/share/fonts/liberation/LiberationMono-Regular.ttf"
-font = ImageFont.truetype(path_font, 24)
+# path_font = "/usr/share/fonts/liberation/LiberationMono-Regular.ttf"
+# font = ImageFont.truetype(path_font, 24)
 
 
 def string_for_action(action):
@@ -38,7 +38,8 @@ def draw_sequences(i, k, step, action, draw, region_image, background, path_test
 
     iou = round(iou, 3)
     footnote = 'action: ' + string_for_action(action) + ' ' + 'reward: ' + str(reward) + ' Iou:' + str(round(iou, 3))
-    draw.text(text_offset, str(footnote), (0, 0, 0), font=font)
+    # draw.text(text_offset, str(footnote), (0, 0, 0), font=font)
+    draw.text(text_offset, str(footnote), (0, 0, 0))
 
     img_for_paste = Image.fromarray(region_image)
     background.paste(img_for_paste, image_offset)
@@ -73,9 +74,10 @@ def draw_sequences_test(step, action, qval, draw, region_image, background, path
         nice.append(round(q_value, 3))
 
     q_val_predictions_text = str(nice)
-
-    draw.text(footnote_offset, footnote, (0, 0, 0), font=font)
-    draw.text(q_predictions_offset, q_val_predictions_text, (0, 0, 0), font=font)
+    draw.text(footnote_offset, footnote, (0, 0, 0))
+    draw.text(q_predictions_offset, q_val_predictions_text, (0, 0, 0))
+    # draw.text(footnote_offset, footnote, (0, 0, 0), font=font)
+    # draw.text(q_predictions_offset, q_val_predictions_text, (0, 0, 0), font=font)
     file_name = path_testing_folder + '/' + image_name + '.png'
     background.save(file_name)
 
