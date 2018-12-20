@@ -12,7 +12,7 @@ Training Object: bird
 ## Requirement
 All up to date</br>
 Python 3.6
-## The Current Structure:
+## Current Structure:
 - Project
   - VOC2012
   - img_test (save test pics here)
