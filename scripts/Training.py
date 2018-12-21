@@ -265,8 +265,8 @@ def main():
                         masked = 0
                 objects_available[object_index] = 0
 
-        if epsilon_value > 0.1:
-            epsilon_value -= 0.1
+        # if epsilon_value > 0.1:
+        #     epsilon_value -= 0.1
 
         model_name = path_model + '/model' + str(class_id) + '.h5'
         model_name2 = path_model + '/model' + str(class_id) + str(epoch_index) + '.h5'
@@ -323,6 +323,6 @@ annotations = gain_annotations(image_names)
 print('images reading done')
 print('training size = ' + str(train_size))
 
-epochs_id = 5
-epsilon = 0.4
+epochs_id = 9
+epsilon = 0.1
 main()
