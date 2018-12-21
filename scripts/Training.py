@@ -23,7 +23,7 @@ def build_model():
     model_vgg = vgg16_model()
 
     #  build reinforcement model here!
-    rl_model = q_network('0')
+    rl_model = q_network()
     return model_vgg, rl_model
     # if epochs_id_input == 0:
     #     rl_models = qn_pascal("0", class_id)
