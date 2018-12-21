@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+            <state relative-caret-position="310">
+              <caret line="39" column="26" lean-forward="true" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
                 <element signature="e#506#532#0" />
@@ -93,7 +93,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RL.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="416">
@@ -170,8 +170,8 @@
         <option value="$PROJECT_DIR$/Setting.py" />
         <option value="$PROJECT_DIR$/View.py" />
         <option value="$PROJECT_DIR$/Testing.py" />
-        <option value="$PROJECT_DIR$/Training.py" />
         <option value="$PROJECT_DIR$/RL.py" />
+        <option value="$PROJECT_DIR$/Training.py" />
       </list>
     </option>
   </component>
@@ -341,12 +341,12 @@
       <workItem from="1544506149139" duration="563000" />
       <workItem from="1544834210191" duration="4472000" />
       <workItem from="1545196385139" duration="2710000" />
-      <workItem from="1545244740139" duration="36318000" />
+      <workItem from="1545244740139" duration="36818000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56047000" />
+    <option name="totallyTimeSpent" value="56547000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -359,22 +359,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="683" y="0" width="997" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24969475" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32959184" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.32959184" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49842933" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49842933" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32959184" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.32959184" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015707" side_tool="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49932885" weight="0.32959184" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32959184" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -493,22 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#506#532#0" />
-            <element signature="e#912#922#0" />
-            <element signature="e#6627#6650#0" />
-            <element signature="e#8436#8474#0" />
-            <element signature="e#13848#13885#0" />
-            <element signature="e#15191#15207#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Read_Image.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -523,6 +508,22 @@
           <folding>
             <element signature="e#0#10#0" expanded="true" />
             <element signature="e#2560#2601#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="39" column="26" lean-forward="true" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#506#532#0" />
+            <element signature="e#912#922#0" />
+            <element signature="e#6627#6650#0" />
+            <element signature="e#8436#8474#0" />
+            <element signature="e#13848#13885#0" />
+            <element signature="e#15191#15207#0" />
           </folding>
         </state>
       </provider>
