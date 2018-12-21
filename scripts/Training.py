@@ -45,7 +45,7 @@ def main():
 
     # replay = [[] for x in range(20)]
 
-    for epoch_index in range(epochs):
+    for epoch_index in range(epochs_id, epochs + epochs_id):
         print('start epoch: ' + str(epoch_index))
         time1 = time.time()
 
@@ -322,5 +322,6 @@ annotations = gain_annotations(image_names)
 print('images reading done')
 print('training size = ' + str(train_size))
 
-
+epochs_id = 5
+epsilon = 0.4
 main()

@@ -50,6 +50,7 @@ def main():
         '''Create Masks'''
         annotation = annotations[image_index]
         gt_masks = create_masks(annotation, image.shape)
+        object_num = np.size(annotation[:, 0])
         size_mask = (image.shape[0], image.shape[1])
         original_shape = size_mask
         region_mask = np.ones([image.shape[0], image.shape[1]])
@@ -116,6 +117,15 @@ def main():
                 history_vector = update_history_vector(history_vector, action)
                 new_state = get_state(region_image, history_vector, model_vgg)
                 state = new_state
+
+        tmp = []
+        for index_o in range(object_num):
+            gt_mask = gt_masks[:, :, index_o]
+            happy = iou_calculator(region_mask, gt_mask)
+            tmp.append(happy)
+
+        iou_result = max(tmp)
+        IoU_storage.append(iou_result)
 
 
 test_size = int(input('Enter the Test Size (How Many Pics):\n'))

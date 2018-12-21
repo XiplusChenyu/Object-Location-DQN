@@ -62,7 +62,7 @@ def update_history_vector(history_vector, action):
         return updated_history_vector
 
 
-def q_network(weights_path):
+def q_network(weights_path="./../../models_image_zooms/model3.h5"):
     rl_model = Sequential()
     rl_model.add(Dense(1024, activation='relu', kernel_initializer=lambda shape: VarianceScaling(scale=0.01)(shape), input_shape=(25112,)))
     rl_model.add(Dropout(0.2))
@@ -74,6 +74,7 @@ def q_network(weights_path):
 
     if not weights_path == '0':
         rl_model.load_weights(weights_path)
+        print('Read')
 
     return rl_model
 
