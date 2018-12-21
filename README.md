@@ -1,7 +1,5 @@
-**I'm dead**<br/>
-
-Current issues:
-- Under training
+# Bounding Box Transfer Model
+- By Chen Huang
 
 # Hierarchical-Object-Location-in-Image
 A pathetic project<br/>
