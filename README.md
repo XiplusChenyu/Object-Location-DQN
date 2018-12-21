@@ -2,7 +2,7 @@
 - By Chen Huang
 
 # Hierarchical-Object-Location-in-Image
-- By Chenyu Xi
+- By Chenyu Xi<br/>
 A pathetic project<br/>
 **See reference.md for reference**<br/>
 Image Zooming Method<br/>
