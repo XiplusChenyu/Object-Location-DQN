@@ -47,6 +47,7 @@ def main():
 
     for epoch_index in range(epochs_id, epochs + epochs_id):
         print('start epoch: ' + str(epoch_index))
+        print(epsilon_value)
         time1 = time.time()
 
         # @Use Train_size to fasten the learning process
