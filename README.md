@@ -4,13 +4,13 @@
 # Hierarchical-Object-Location-in-Image
 - By Chenyu Xi<br/>
 
-A pathetic project<br/>
-**See reference.md for reference**<br/>
+The <a href="https://imatge-upc.github.io/detection-2016-nipsws/">**reference**</a> is here, we update the model based on their codes and rewrite all functions.<br/>
 Image Zooming Method<br/>
+
 ## Current Setting:
 Training Object: bird
 ## Requirement
-All up to date</br>
+All packets up to date (2018/12/21)</br>
 Python 3.6
 ## Current Structure:
 - Project
