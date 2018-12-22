@@ -1,5 +1,9 @@
 # Bounding Box Transfer Model
 - By Chen Huang
+## Current Setting:
+Training Object: areoplane<br/>
+**See <a href="https://github.com/XiplusChenyu/Object-Location-DQN/tree/master/Bounding%20Box%20Transfer%20Model-another%20model">Here</a>**
+
 
 # Hierarchical-Object-Location-in-Image
 - By Chenyu Xi<br/>
