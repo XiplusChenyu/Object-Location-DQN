@@ -12,6 +12,13 @@ import time
 from PIL import Image, ImageDraw
 
 
+def averagenum(num):
+    nsum = 0
+    for i in range(len(num)):
+        nsum += num[i]
+    return nsum / len(num)
+
+
 def build_model(weights_path=path_model, model_name=test_model_name):
     #  build vgg16 model here
     model_vgg = vgg16_model()
@@ -34,6 +41,7 @@ def main():
     IoU_storage = []
 
     for image_index in range(len(image_names)):
+        image_index += 10
         if not labels[image_index] == '1':
             continue
         if not test_count > 0:
@@ -42,10 +50,7 @@ def main():
         image_name = image_names[image_index]
         image = np.array(obtain_image(image_name))
         image_for_search = image
-
-        '''The draw image part'''
-        background = Image.new('RGBA', (10000, 2000), (255, 255, 255, 255))
-        draw = ImageDraw.Draw(background)
+        tmp = 0
 
         '''Create Masks'''
         annotation = annotations[image_index]
@@ -54,6 +59,15 @@ def main():
         size_mask = (image.shape[0], image.shape[1])
         original_shape = size_mask
         region_mask = np.ones([image.shape[0], image.shape[1]])
+
+        '''The draw image part for each step'''
+        background = Image.new('RGBA', (10000, 2000), (255, 255, 255, 255))
+        draw = ImageDraw.Draw(background)
+
+        '''The draw image part for bounding box move'''
+        background2 = Image.fromarray(image)
+        draw2 = ImageDraw.Draw(background2)
+        color_number = 0
 
         '''object within the image'''
         objects = annotation[:, 0]
@@ -74,6 +88,9 @@ def main():
         region_mask = np.ones([image.shape[0], image.shape[1]])
 
         while (step < step_num_test) and absolute_status:
+            # box_color = (color_number, 0, 100)
+            box_color = (255, 0, 0)
+            # color_number = 0
             iou = 0
 
             '''Set History Vector'''
@@ -95,8 +112,13 @@ def main():
                 q_value = rl_model.predict(state.T, batch_size=1)
                 # print (q_value)
                 action = (np.argmax(q_value)) + 1
+                box_area = ((int(offset[1] + size_mask[1]), int(offset[0] + size_mask[0])),
+                            (int(offset[1]), int(offset[0])))
 
                 if action == 6:
+                    box_color = (0, 0, 255)
+                    draw_sequences_test_box(draw2, background2, box_area, box_color, path_testing_folder, image_name,
+                                            bool_draw_test)
                     offset = (0, 0)
                     status = 0
 
@@ -108,11 +130,20 @@ def main():
                     image_for_search = mask_image_with_mean_background(region_mask, image_for_search)
                     region_image = image_for_search
 
+
                 else:
                     region_image, region_mask, offset, size_mask = agent_move_mask(action, original_shape,
                                                                                    size_mask, offset, region_image)
+                    box_area = ((int(offset[1] + size_mask[1]), int(offset[0] + size_mask[0])),
+                                (int(offset[1]), int(offset[0])))
+
                     draw_sequences_test(step, action, q_value, draw, region_image, background, path_testing_folder,
                                         region_mask, image_name, bool_draw_test)
+
+                    draw_sequences_test_box(draw2, background2, box_area, box_color, path_testing_folder, image_name,
+                                            bool_draw_test)
+                    # color_number += 30
+                    # box_color = (color_number, 0, 100)
 
                 history_vector = update_history_vector(history_vector, action)
                 new_state = get_state(region_image, history_vector, model_vgg)
@@ -126,6 +157,8 @@ def main():
 
         iou_result = max(tmp)
         IoU_storage.append(iou_result)
+
+    print(averagenum(IoU_storage))
 
 
 test_size = int(input('Enter the Test Size (How Many Pics):\n'))
