@@ -1,9 +1,7 @@
-# Bounding Box Transfer Model
-- By Chen Huang
-## Current Setting:
-Training Object: areoplane<br/>
-**See <a href="https://github.com/XiplusChenyu/Object-Location-DQN/tree/master/Bounding%20Box%20Transfer%20Model-another%20model">Here</a>**
-
+# <a href="https://github.com/XiplusChenyu/Object-Location-DQN/blob/master/Project%20Report.pdf">Report</a> and Authors
+<center>
+<img src="https://github.com/XiplusChenyu/Object-Location-DQN/blob/master/screenshot.png" width="800">
+</center>
 
 # Hierarchical-Object-Location-in-Image
 - By Chenyu Xi<br/>
@@ -29,3 +27,9 @@ Python 3.6
       - Testing.py (use this for testing)
       - Setting.py (use this for setting paras)
       - Others
+
+# Bounding Box Transfer Model
+- By Chen Huang
+## Current Setting:
+Training Object: areoplane<br/>
+**See <a href="https://github.com/XiplusChenyu/Object-Location-DQN/tree/master/Bounding%20Box%20Transfer%20Model-another%20model">Here</a>**
